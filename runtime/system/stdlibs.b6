@@ -1,0 +1,58 @@
+/*
+ * stdlibs.b6
+ */
+
+namespace system;
+
+/* The following declaration could be moved inside the next `clib(c)'
+   block but is defined here to show the `inline' native method
+   declaration form. */
+
+/**
+ * Gets the current value of the environment variable.
+ *
+ * @param name the name of the environment variable whose value is
+ * queried.
+ * @return the current value of the environment variable.
+ */
+public native clib("c") string? getenv(string name);
+
+/* The `clib' import implies native for all function declarations
+   inside the declaration block.  The name of the b6 function is the
+   default name of the imported symbol, however that can be overriden
+   with the name() declaration. */
+
+clib("c")
+{
+  public int putenv(string name);
+
+  name(setenv) int setenv_native(string name, string value, int overwrite);
+
+  public int unsetenv(string name);
+}
+
+/**
+ * Sets the value of the named environment variable.
+ *
+ * @param name the name of the environment variable to set.
+ * @param value the new value of the environment varariable.
+ * @param overwrite if the named environment variable already exists
+ * it the current environment, this argument specifies if its value is
+ * overwritten.
+ */
+public int setenv(string name, string value, bool overwrite)
+{
+  return setenv_native(name, value, overwrite ? 1 : 0);
+}
+
+/* This declaration defines a native function which is not imported
+   from any existing system libraries. */
+
+/**
+ * Outputs debug message to the system debug output channel.
+ *
+ * @param message the debug message to display.
+ */
+public native void debug(string message);
+
+public native(c) void test_debug(string message);

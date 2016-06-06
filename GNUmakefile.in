@@ -1,0 +1,14 @@
+# GNUmakefile.in
+#
+
+srcdir=@srcdir@
+CC=@CC@
+
+all:
+	@echo "Targets: clean, maintainer-clean"
+
+clean:
+	$(RM) GNUmakefile b6config.h config.log config.status *~
+
+maintainer-clean: clean
+	$(RM) configure
