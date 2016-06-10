@@ -6,3 +6,4 @@ RUN apt-get upgrade -y
 RUN apt-get install -y autoconf
 RUN apt-get install -y less
 RUN apt-get install -y gcc
+RUN apt-get install -y make
